@@ -89,14 +89,8 @@ class XmlMixin:
     def _write_stop_info(self, started_at: PlainDateTime) -> None:
         ended_at = _now_local()
         ended = ended_at.format(_SPACE_SEP_PATTERN)
-        duration_s = (
-            int(
-                ended_at.difference(started_at, naive_arithmetic_ok=True).total(
-                    "seconds"
-                )
-            )
-            if started_at
-            else 0
+        duration_s = int(
+            ended_at.difference(started_at, naive_arithmetic_ok=True).total("seconds")
         )
 
         with open(self.fn_file, "a", encoding="utf-8") as f:
